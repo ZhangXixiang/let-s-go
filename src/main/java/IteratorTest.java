@@ -7,18 +7,20 @@ public class IteratorTest {
 
 
     public static void main(String[] args) {
-        final List<String> strings = new ArrayList<>(Arrays.asList("1", "2", "3", "4222","3212"));
+        // final List<String> strings = new ArrayList<>(Arrays.asList("1", "2", "3", "4222","3212"));
+        final List<String> strings = new ArrayList<>(Arrays.asList("1", "2", "3", "4222"));
 
         for (String str : strings) {
             if (str.length() == 4) {
                 strings.remove(str);
+                System.out.println("正在删除=======" + str);
             }
-            System.out.println(str);
+            // System.out.println(str);
         }
         System.out.println("=======" + strings);
 
 
-        final Iterator<String> iterator = strings.iterator();
+        /*final Iterator<String> iterator = strings.iterator();
         while (iterator.hasNext()) {
             String next = iterator.next();
             if (next.length() == 4) {
@@ -26,7 +28,7 @@ public class IteratorTest {
             }
             System.out.println(next);
         }
-        System.out.println("=======" + strings);
+        System.out.println("=======" + strings);*/
 
     }
 
