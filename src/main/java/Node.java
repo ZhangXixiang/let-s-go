@@ -58,36 +58,67 @@ public class Node {
 
     //深度优先遍历
     public static void depthFirstSearch(Node rNode) {
-        Stack<Node> stack = new Stack<Node>();
+        Stack<Node> stack = new Stack<>();
         stack.push(rNode);
         Node node = null;
-        while (!stack.empty()) {
+        while (!stack.isEmpty()){
             node = stack.pop();
-            System.out.print(node.data);//遍历根结点
-            if (node.rightChild != null) {
-                stack.push(node.rightChild);//先将右子树压栈
+            System.out.println(node.data);
+
+            if(null != node.rightChild){
+                stack.push(node.rightChild);
             }
-            if (node.leftChild != null) {
-                stack.push(node.leftChild);//再将左子树压栈
+            if(null != node.leftChild){
+                stack.push(node.leftChild);
             }
         }
+
+
+
+        // Stack<Node> stack = new Stack<Node>();
+        // stack.push(rNode);
+        // Node node = null;
+        // while (!stack.empty()) {
+        //     node = stack.pop();
+        //     System.out.print(node.data);//遍历根结点
+        //     if (node.rightChild != null) {
+        //         stack.push(node.rightChild);//先将右子树压栈
+        //     }
+        //     if (node.leftChild != null) {
+        //         stack.push(node.leftChild);//再将左子树压栈
+        //     }
+        // }
     }
 
     //广度优先遍历
     public static void breadFirstSearch(Node rNode) {
-        LinkedList<Node> queue = new LinkedList<Node>();
-        queue.offer(rNode);
-        Node node = null;
-        while (!queue.isEmpty()) {
-            node = queue.poll();
-            System.out.print(node.data);//遍历根结点
-            if (node.leftChild != null) {
-                queue.offer(node.leftChild);//先将左子树入队
+        LinkedList<Node> queue = new LinkedList<>();
+        queue.add(rNode);
+
+        while (!queue.isEmpty()){
+            Node node = queue.poll();
+            System.out.println(node.data);
+            if(node.leftChild != null){
+                queue.offer(node.leftChild);
             }
-            if (node.rightChild != null) {
-                queue.offer(node.rightChild);//再将右子树入队
+            if(node.rightChild != null){
+                queue.offer(node.rightChild);
             }
         }
+
+        // LinkedList<Node> queue = new LinkedList<Node>();
+        // queue.offer(rNode);
+        // Node node = null;
+        // while (!queue.isEmpty()) {
+        //     node = queue.poll();
+        //     System.out.print(node.data);//遍历根结点
+        //     if (node.leftChild != null) {
+        //         queue.offer(node.leftChild);//先将左子树入队
+        //     }
+        //     if (node.rightChild != null) {
+        //         queue.offer(node.rightChild);//再将右子树入队
+        //     }
+        // }
     }
 
 
@@ -101,10 +132,10 @@ public class Node {
         Node A = new Node('A',B,C);
 
         // breadFirstSearch(A);
-        // depthFirstSearch(A);
+        depthFirstSearch(A);
         // preOrder(A);
         // inOrder(A);
-        postOrder(A);
+        // postOrder(A);
 
     }
 
