@@ -1,4 +1,4 @@
-public class ObjectTest extends Object {
+public class ObjectTest extends Object implements Cloneable {
 
     private String name;
     private Integer age;
@@ -10,9 +10,9 @@ public class ObjectTest extends Object {
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        // return super.clone();
-
-        return getInstance();
+        return super.clone();
+        // 单例模式
+        // return getInstance();
     }
 
     /**
@@ -41,11 +41,82 @@ public class ObjectTest extends Object {
         return objectTest;
     }
 
+    @Override
+    public String toString() {
+        return "ObjectTest{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+    public static synchronized ObjectTest lock() throws Exception {
+        Thread.sleep(20000);
+        return objectTest;
+    }
+
 
     public static void main(String[] args) throws Exception {
         final ObjectTest objectTest = new ObjectTest("1", 1);
-        final Object clone = objectTest.clone();
-        final Object clone2 = objectTest.clone();
-        System.out.println(clone2.equals(clone));
+        // final Object clone = objectTest.clone();
+        // final Object clone2 = objectTest.clone();
+        // System.out.println(clone2.equals(clone));
+        System.out.println(objectTest.toString());
+
+        final Object object = new Object();
+        Thread t1 = new Thread() {
+            public void run() {
+                synchronized (object) {
+                    System.out.println("T1 start!");
+                    try {
+                        object.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("T1 end!");
+                }
+            }
+        };
+
+        Thread t3 = new Thread() {
+            public void run() {
+                synchronized (object) {
+                    System.out.println("T3 start!");
+                    try {
+                        object.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("T3 end!");
+                }
+            }
+        };
+        Thread t2 = new Thread() {
+            public void run() {
+                synchronized (object) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        System.out.println("err");
+                    }
+                    System.out.println("T2 start!");
+                    object.notifyAll();
+                    // object.notify();
+                    // try {
+                    //     object.wait();
+                    // } catch (InterruptedException e) {
+                    //     e.printStackTrace();
+                    // }
+                    System.out.println("T2 end!");
+                }
+            }
+        };
+
+        t1.start();
+        t3.start();
+        t2.start();
+
+
+        System.out.println("hahahah");
+
     }
 }
