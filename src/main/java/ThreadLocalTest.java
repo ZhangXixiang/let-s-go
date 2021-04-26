@@ -28,8 +28,15 @@ public class ThreadLocalTest {
         }
     }
 
+    static ThreadLocal<String> t = new ThreadLocal<>();
+
     public static void main(String []args) {
-        final A a = new A();
+        t.set("a");
+        t.set("b");
+        System.out.println(t.get());
+        t.set("c");
+        System.out.println(t.get());
+        /*final A a = new A();
         final B b = new B();
         for(int i = 0 ; i < 15 ; i ++) {
             final String resouce1 = "线程-" + i;
@@ -47,7 +54,7 @@ public class ThreadLocalTest {
                     }
                 }
             }.start();
-        }
+        }*/
     }
 
 }

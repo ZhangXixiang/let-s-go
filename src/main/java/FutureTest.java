@@ -6,30 +6,30 @@ public class FutureTest {
     public static void main(String[] args) throws Exception {
 
         final long startTime = System.currentTimeMillis();
-        FutureTask<Callable> task1 = new FutureTask<>(new Callable<Callable>() {
+        FutureTask<String> task1 = new FutureTask<String>(new Callable<String>() {
             @Override
-            public Callable call() throws Exception {
+            public String call() throws Exception {
                 try {
                     Thread.sleep(4000);
                 } catch (Exception e) {
                     System.out.println("aaa");
                 }
-                return null;
+                return "b";
             }
         });
 
         es.execute(task1);
         threadPoolDesc(es);
 
-        FutureTask<Callable> task2 = new FutureTask<>(new Callable<Callable>() {
+        FutureTask<String> task2 = new FutureTask<String>(new Callable<String>() {
             @Override
-            public Callable call() throws Exception {
+            public String call() throws Exception {
                 try {
                     Thread.sleep(4000);
                 } catch (Exception e) {
                     System.out.println("aaa");
                 }
-                return null;
+                return "a";
             }
         });
         es.execute(task2);
@@ -62,11 +62,10 @@ public class FutureTest {
         });
         es.execute(task4);
         threadPoolDesc(es);
-
-        task1.get();
-        task2.get();
-        task3.get();
-        task4.get();
+        System.out.println(task1.get());
+        System.out.println(task2.get());
+        System.out.println(task3.get());
+        System.out.println(task4.get());
 
         System.out.println(System.currentTimeMillis() - startTime);
     }

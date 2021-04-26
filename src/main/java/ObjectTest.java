@@ -82,10 +82,15 @@ public class ObjectTest extends Object implements Cloneable {
                 synchronized (object) {
                     System.out.println("T3 start!");
                     try {
-                        object.wait();
+                        object.wait(10000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    /*try {
+                        Thread.sleep(10000);
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }*/
                     System.out.println("T3 end!");
                 }
             }
@@ -99,7 +104,7 @@ public class ObjectTest extends Object implements Cloneable {
                         System.out.println("err");
                     }
                     System.out.println("T2 start!");
-                    object.notifyAll();
+                    // object.notifyAll();
                     // object.notify();
                     // try {
                     //     object.wait();
