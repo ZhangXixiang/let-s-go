@@ -25,16 +25,14 @@ public class ListNode {
 
 
 class Solution {
-    public static ListNode ReverseList(ListNode head) {
 
-        if(null == head || null == head.next){
+    public static ListNode ReverseList(ListNode head) {
+        if (null == head || null == head.next) {
             return head;
         }
-
         ListNode cur = head;
         ListNode pre = null;
-
-        while (null != cur){
+        while (null != cur) {
             ListNode next = cur.next;
             cur.next = pre;
 
@@ -42,7 +40,61 @@ class Solution {
             cur = next;
         }
         return pre;
+    }
 
+    public ListNode detectCycle(ListNode head) {
+        return null;
+    }
+
+
+    /**
+     * 找环入口
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode hasCircle(ListNode head) {
+        if (null == head) {
+            return null;
+        }
+
+        ListNode fast = head;
+        ListNode slow = head;
+        while (null != fast && null != fast.next) {
+            slow = slow.next;
+            fast = fast.next.next;
+            // 第一次相遇点
+            if (slow == fast) {
+                ListNode slow2 = head;
+                while (slow != slow2) {
+                    slow = slow.next;
+                    slow2 = slow2.next;
+                }
+                return slow;
+            }
+        }
+        return null;
+    }
+
+    // 将两个有序的链表合并为一个新链表，要求新的链表是通过拼接两个链表的节点来生成的，且合并后新链表依然有序。
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        // write code here
+        if (null == l1) {
+            return l2;
+        }
+        if (null == l2) {
+            return l1;
+        }
+
+        ListNode merge = null;
+        if(l1.val < l2.val){
+            merge = l1;
+            merge.next = mergeTwoLists(l1.next,l2);
+        } else {
+            merge = l2;
+            merge.next = mergeTwoLists(l1,l2.next);
+        }
+        return merge;
     }
 
 

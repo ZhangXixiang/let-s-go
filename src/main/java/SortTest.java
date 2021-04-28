@@ -4,10 +4,11 @@ public class SortTest {
 
     public static void main(String[] args) {
 
-        int[] a = {1, 2, 3, 2, 2, 2, 7, 8, 9};
+        int[] a = {1, 2, 2, 2, 2, 2, 7, 8, 9,10,11};
         int[] b = {1, 6, 3, 2, 2, 2, 7, 8, 9};
-        // System.out.println(bsearch(a,9,2));
-        System.out.println(bubbleSort(b));
+        System.out.println(search(a,11));
+        // System.out.println(bsearch(a, a.length, 11));
+        // System.out.println(bubbleSort(b));
         // new StopWatch("a");
         // 10是初始大小，0.75是装载因子，true是表示按照访问时间排序
         HashMap<Integer, Integer> m = new LinkedHashMap<>(10, 0.75f, true);
@@ -43,23 +44,19 @@ public class SortTest {
         return 0 == tagStr.length();*/
         Stack<Character> stack = new Stack<>();
 
-        for(char alp : tagStr.toCharArray()){
-            if(alp == '('){
+        for (char alp : tagStr.toCharArray()) {
+            if (alp == '(') {
                 stack.push(')');
-            }else if(alp == '['){
+            } else if (alp == '[') {
                 stack.push(']');
-            }else if(alp == '{'){
+            } else if (alp == '{') {
                 stack.push('}');
-            }else if(stack.isEmpty() || stack.pop()!= alp){
+            } else if (stack.isEmpty() || stack.pop() != alp) {
                 return false;
             }
         }
         return stack.isEmpty();
     }
-
-
-
-
 
 
     /**
@@ -80,6 +77,32 @@ public class SortTest {
             }
         }
         return a;
+    }
+
+    /**
+     * 2分查找
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int search(int[] nums, int target) {
+        // write code here
+        int low = 0;
+        int high = nums.length - 1;
+        while (low <= high) {
+            int mid = low + ((high - low)>>1);
+            if (target > nums[mid]) {
+                low = mid + 1;
+            } else if (target < nums[mid]) {
+                high = mid -1;
+            } else {
+                if ((mid == 0) || (nums[mid - 1] != target)) return mid;
+                else high = mid - 1;
+                // return mid;
+            }
+        }
+        return -1;
     }
 
 

@@ -131,8 +131,8 @@ public class Node {
         Node C = new Node('C',F,G);
         Node A = new Node('A',B,C);
 
-        // breadFirstSearch(A);
-        depthFirstSearch(A);
+        breadFirstSearch(A);
+        // depthFirstSearch(A);
         // preOrder(A);
         // inOrder(A);
         // postOrder(A);
