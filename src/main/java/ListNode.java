@@ -98,4 +98,27 @@ class Solution {
     }
 
 
+    public static ListNode re(ListNode root){
+        if(null == root || null == root.next){
+            return root;
+        }
+
+        ListNode cur = root;
+        ListNode pre = null;
+
+        while (cur != null){
+            ListNode next = cur.next;
+            cur.next = pre;
+
+            pre = cur;
+            cur = next;
+
+
+        }
+
+        return pre;
+
+    }
+
+
 }
